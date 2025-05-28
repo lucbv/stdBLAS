@@ -14,11 +14,12 @@ void mdspan_to_view_test_impl()
   using Kokkos::mdspan;
   using Kokkos::extents;
   using Kokkos::dynamic_extent;
+  using Kokkos::dim;
 
   // rank1, non-const
   {
     std::vector<MDSpanValueType> a(5);
-    using mdspan_t = mdspan<MDSpanValueType, extents<size_t, dynamic_extent>>;
+    using mdspan_t = mdspan<MDSpanValueType, dim<1>>;
     mdspan_t mdsp(a.data(), a.size());
 
     auto kv = KokkosKernelsSTD::Impl::mdspan_to_view(mdsp);
@@ -32,7 +33,7 @@ void mdspan_to_view_test_impl()
   // rank1, const
   {
     std::vector<MDSpanValueType> a(5);
-    using mdspan_t = mdspan<const MDSpanValueType, extents<size_t, dynamic_extent>>;
+    using mdspan_t = mdspan<const MDSpanValueType, dim<1>>;
     mdspan_t mdsp(a.data(), a.size());
 
     auto kv = KokkosKernelsSTD::Impl::mdspan_to_view(mdsp);
@@ -46,7 +47,7 @@ void mdspan_to_view_test_impl()
   // rank2, non-const
   {
     std::vector<MDSpanValueType> a(12);
-    using mdspan_t = mdspan<MDSpanValueType, extents<size_t, dynamic_extent, dynamic_extent>>;
+    using mdspan_t = mdspan<MDSpanValueType, dim<2>>;
     mdspan_t mdsp(a.data(), 3, 4);
 
     auto kv = KokkosKernelsSTD::Impl::mdspan_to_view(mdsp);
@@ -61,7 +62,7 @@ void mdspan_to_view_test_impl()
   // rank2, const
   {
     std::vector<MDSpanValueType> a(12);
-    using mdspan_t = mdspan<const MDSpanValueType, extents<size_t, dynamic_extent, dynamic_extent>>;
+    using mdspan_t = mdspan<const MDSpanValueType, dim<2>>;
     mdspan_t mdsp(a.data(), 3, 4);
 
     auto kv = KokkosKernelsSTD::Impl::mdspan_to_view(mdsp);
@@ -97,6 +98,7 @@ void transposed_mdspan_to_view_test_impl()
   using Kokkos::mdspan;
   using Kokkos::extents;
   using Kokkos::dynamic_extent;
+  using Kokkos::dim;
 
   using lr_t = Kokkos::layout_right;
   using ll_t = Kokkos::layout_left;
@@ -106,7 +108,7 @@ void transposed_mdspan_to_view_test_impl()
 
   {
     // mdspan is layout right
-    using mdspan_t = mdspan<MDSpanValueType, extents<size_t, dynamic_extent, dynamic_extent>, lr_t>;
+    using mdspan_t = mdspan<MDSpanValueType, dim<2>, lr_t>;
     mdspan_t mdsp(a.data(), 3, 4);
     auto mdsp_T = MDSPAN_IMPL_STANDARD_NAMESPACE::MDSPAN_IMPL_PROPOSED_NAMESPACE::linalg::transposed(mdsp);
 
@@ -134,7 +136,7 @@ void transposed_mdspan_to_view_test_impl()
 
   {
     // mdspan is layout left
-    using mdspan_t = mdspan<MDSpanValueType, extents<size_t, dynamic_extent, dynamic_extent>, ll_t>;
+    using mdspan_t = mdspan<MDSpanValueType, dim<2>, ll_t>;
     mdspan_t mdsp(a.data(), 3, 4);
     auto mdsp_T = MDSPAN_IMPL_STANDARD_NAMESPACE::MDSPAN_IMPL_PROPOSED_NAMESPACE::linalg::transposed(mdsp);
 

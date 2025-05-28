@@ -11,10 +11,10 @@ namespace KokkosKernelsSTD {
 
 template<class ExeSpace,
 	 class ElementType_x,
-	 Kokkos::extents<int>::size_type ext_x,
+	 size_t ext_x,
          class Layout_x,
          class ElementType_y,
-	 Kokkos::extents<int>::size_type ext_y,
+	 size_t ext_y,
          class Layout_y,
    class Scalar>
 Scalar dot(kokkos_exec<ExeSpace> /*kexe*/,
@@ -71,10 +71,10 @@ Scalar dot(kokkos_exec<ExeSpace> /*kexe*/,
 
 template<class ExeSpace,
 	 class ElementType_x,
-	 Kokkos::extents<int>::size_type ext_x,
+	 size_t ext_x,
          class Layout_x,
          class ElementType_y,
-	 Kokkos::extents<int>::size_type ext_y,
+	 size_t ext_y,
          class Layout_y,
 	 class Scalar>
 Scalar dot(kokkos_exec<ExeSpace>,
