@@ -92,7 +92,7 @@ mdspan_t make_mdspan(ValueType *data, std::size_t ext0, std::size_t ext1) {
 template<class A_t, class ValueType = typename A_t::value_type>
 void set(A_t A, ValueType value)
 {
-  using index_type = typename Kokkos::extents<size_t>::index_type;
+  using index_type = typename MDSPAN_IMPL_STANDARD_NAMESPACE::extents<size_t>::index_type;
   for (index_type i = 0; i < A.extent(0); ++i) {
     for (index_type j = 0; j < A.extent(1); ++j) {
       A(i, j) = value;
